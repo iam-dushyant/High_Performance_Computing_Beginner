@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+
+  /* Constant values */
+  const float y0 = 1.0;
+  const float ustar = 1.0;
+  const float kappa = 0.41;
+
+  /* Grid properties */
+  const int NX=1000;    // Number of x points
+  const int NY=1000;    // Number of y points
+  const float xmin=0.0; // Minimum x value
+  const float xmax=30.0; // Maximum x value
+  const float ymin=0.0; // Minimum y value
+  const float ymax=30.0; // Maximum y value
+
+  /*** Place x points in the middle of the cell ***/
+  /* LOOP 1 */
+  for (int i=0; i<NX+2; i++){
+    x[i] = ( (float) i - 0.5) * dx;
+  }
+
+  /*** Place y points in the middle of the cell ***/
+  /* LOOP 2 */
+  for (int j=0; j<NY+2; j++){
+    y[j] = ( (float) j - 0.5) * dy;
+  }
+
+  for (int i=0; i<NX+1; i++) {
+    if (y[i] <= y0) {
+      velx[i] = 0;
+    }
+    else {
+      velx[i] = (ustar/kappa) * log(y[i]/y0);
+    }
+  }
+
+FILE *velocityfile;
+  initialfile = fopen("velocity_profile.dat", "w");
+  for (int i=0; i<NX+2; i++){
+    fprintf(initialfile, "%g %g\n", x[i], velx[i]);
+  }
+  fclose(velocityfile);
+
+  return 0;
+}

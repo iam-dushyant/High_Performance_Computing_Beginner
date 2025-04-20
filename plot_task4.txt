@@ -1,0 +1,19 @@
+# Send output to a PNG file
+set terminal png
+# Set the name of the output file
+set output "velocity_task4.png"
+
+# Set ranges and labels for axes
+#set xrange [0:30.0]
+#set yrange [0:1.0]
+set xlabel "x"
+set ylabel "u(x)"
+
+# Enforce an aspect ratio of 1
+set key off
+
+
+# Plot the data 
+plot "velocity_task4.dat" with line 
+
+# End of file
